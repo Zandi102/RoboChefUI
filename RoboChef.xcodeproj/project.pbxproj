@@ -14,6 +14,10 @@
 		DD3581352A093EE400186912 /* RoboChefTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581342A093EE400186912 /* RoboChefTests.swift */; };
 		DD35813F2A093EE400186912 /* RoboChefUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35813E2A093EE400186912 /* RoboChefUITests.swift */; };
 		DD3581412A093EE400186912 /* RoboChefUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581402A093EE400186912 /* RoboChefUITestsLaunchTests.swift */; };
+		DD35814F2A0940C100186912 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35814E2A0940C100186912 /* Login.swift */; };
+		DD3581522A09410700186912 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581512A09410700186912 /* CustomViews.swift */; };
+		DD3581542A09412300186912 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581532A09412300186912 /* Signup.swift */; };
+		DD3581582A17FCAE00186912 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581572A17FCAE00186912 /* Home.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		DD35813A2A093EE400186912 /* RoboChefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoboChefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD35813E2A093EE400186912 /* RoboChefUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoboChefUITests.swift; sourceTree = "<group>"; };
 		DD3581402A093EE400186912 /* RoboChefUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoboChefUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		DD35814E2A0940C100186912 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		DD3581512A09410700186912 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
+		DD3581532A09412300186912 /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
+		DD3581572A17FCAE00186912 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,8 @@
 		DD3581222A093EE100186912 /* RoboChef */ = {
 			isa = PBXGroup;
 			children = (
+				DD3581502A0940E600186912 /* SupportingViews */,
+				DD35814D2A0940A400186912 /* Views */,
 				DD3581232A093EE100186912 /* RoboChefApp.swift */,
 				DD3581252A093EE100186912 /* ContentView.swift */,
 				DD3581272A093EE400186912 /* Assets.xcassets */,
@@ -125,6 +135,24 @@
 				DD3581402A093EE400186912 /* RoboChefUITestsLaunchTests.swift */,
 			);
 			path = RoboChefUITests;
+			sourceTree = "<group>";
+		};
+		DD35814D2A0940A400186912 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DD35814E2A0940C100186912 /* Login.swift */,
+				DD3581532A09412300186912 /* Signup.swift */,
+				DD3581572A17FCAE00186912 /* Home.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DD3581502A0940E600186912 /* SupportingViews */ = {
+			isa = PBXGroup;
+			children = (
+				DD3581512A09410700186912 /* CustomViews.swift */,
+			);
+			path = SupportingViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD35814F2A0940C100186912 /* Login.swift in Sources */,
+				DD3581542A09412300186912 /* Signup.swift in Sources */,
+				DD3581522A09410700186912 /* CustomViews.swift in Sources */,
 				DD3581262A093EE100186912 /* ContentView.swift in Sources */,
+				DD3581582A17FCAE00186912 /* Home.swift in Sources */,
 				DD3581242A093EE100186912 /* RoboChefApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
