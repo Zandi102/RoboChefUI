@@ -18,6 +18,8 @@
 		DD3581522A09410700186912 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581512A09410700186912 /* CustomViews.swift */; };
 		DD3581542A09412300186912 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581532A09412300186912 /* Signup.swift */; };
 		DD3581582A17FCAE00186912 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581572A17FCAE00186912 /* Home.swift */; };
+		DD35815A2A36778300186912 /* Grocery.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD3581592A36778300186912 /* Grocery.swift */; };
+		DD35815E2A36781300186912 /* RecipeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD35815D2A36781300186912 /* RecipeGenerator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		DD3581512A09410700186912 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		DD3581532A09412300186912 /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
 		DD3581572A17FCAE00186912 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		DD3581592A36778300186912 /* Grocery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery.swift; sourceTree = "<group>"; };
+		DD35815D2A36781300186912 /* RecipeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeGenerator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 				DD35814E2A0940C100186912 /* Login.swift */,
 				DD3581532A09412300186912 /* Signup.swift */,
 				DD3581572A17FCAE00186912 /* Home.swift */,
+				DD3581592A36778300186912 /* Grocery.swift */,
+				DD35815D2A36781300186912 /* RecipeGenerator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +293,8 @@
 			files = (
 				DD35814F2A0940C100186912 /* Login.swift in Sources */,
 				DD3581542A09412300186912 /* Signup.swift in Sources */,
+				DD35815E2A36781300186912 /* RecipeGenerator.swift in Sources */,
+				DD35815A2A36778300186912 /* Grocery.swift in Sources */,
 				DD3581522A09410700186912 /* CustomViews.swift in Sources */,
 				DD3581262A093EE100186912 /* ContentView.swift in Sources */,
 				DD3581582A17FCAE00186912 /* Home.swift in Sources */,
