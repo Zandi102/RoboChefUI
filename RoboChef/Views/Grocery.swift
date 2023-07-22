@@ -55,7 +55,7 @@ struct GroceryView: View {
                                 Image(systemName: "cart.fill")
                                     .foregroundColor(Color("color2"))
                                 Text("Shopping List")
-                                    .font(.title)
+                                    .font(Font.title2)
                                     .foregroundColor(Color("color2"))
                                     .padding(.trailing, 100)
                                 Button("+") {
@@ -89,7 +89,7 @@ struct GroceryView: View {
                                 Image(systemName: "bag.fill")
                                     .foregroundColor(Color("color2"))
                                 Text("My Pantry")
-                                    .font(.title)
+                                    .font(Font.title2)
                                     .foregroundColor(Color("color2"))
                                     .padding(.trailing, 145)
                                 Button("+") {

@@ -16,16 +16,18 @@ struct Login: View {
     @State private var showError = false
     @State var isLinkActive = false
     
-    func login() {
+    func login() async {
         let url = URL(string: "http://localhost:8080/auth/login")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpMethod = "POST"
+        
         let parameters: [String: Any] = [
             "username": username,
             "password": password
         ]
+        
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
         } catch {
@@ -33,32 +35,22 @@ struct Login: View {
             return
         }
 
-        let semaphore = DispatchSemaphore(value: 0)
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard
-                let response = response as? HTTPURLResponse,
-                error == nil
-            else {                                                               // check for fundamental networking error
-                print("error", error ?? URLError(.badServerResponse))
-                semaphore.signal()
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
                 return
             }
-
-            if response.statusCode == 200 {
+            
+            if httpResponse.statusCode == 200 {
                 isLoginSuccessful = true
+            } else {
+                print("Incorrect credentials")
+                print(httpResponse.statusCode)
             }
-            else {
-                print("incorrect credentials")
-                print(response.statusCode)
-            }
-
-            semaphore.signal()
+        } catch {
+            print("Error during login: \(error)")
         }
-
-        task.resume()
-
-        _ = semaphore.wait(timeout: .distantFuture)
     }
 
     
@@ -99,7 +91,7 @@ struct Login: View {
                                 .font(.system(size: 27))
                                 .fontWeight(.bold)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.leading, 270)
+                                .padding(.leading, 250)
                                 .padding(.top, -150)
                         }
 
@@ -109,47 +101,49 @@ struct Login: View {
                                 CustomTextField(placeHolder: "Password", imageName: "lock", bColor: "textColor1", tOpacity: 0.6, value: $password)
                             }
                             
-                            VStack(alignment: .trailing) {
-                                Button(action: {
-                                    //add forgot password functionality
-                                }, label: {
-                                    Text("Forgot Password?")
-                                        .fontWeight(.bold).padding(.bottom, 20)
-                                        .font(.system(size: 18))
-                                        .foregroundColor(.black)
-                                })
+                            VStack() {
+
                                 NavigationLink(destination: Home(), isActive: $isLoginSuccessful) {
                                     Button(action: {
-                                        login()
+                                        Task {
+                                            await self.login()
+                                        }
                                     }, label: {
                                         CustomButton(title: "Sign In", bgColor: "color3");
                                     })
                                 }
                             }.padding(.horizontal, 20)
+                            
                             HStack(spacing: 20) {
-                                Button(action: {}, label: {
-                                    Image("fb")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.horizontal, 75)
-                                        .padding(.vertical, 15)
-                                        .background(Color("color3"))
-                                        .cornerRadius(15)
-                                })
+                                GeometryReader { geometry in
+                                    Button(action: {}, label: {
+                                        Image("fb")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .frame(width: min(geometry.size.width, 200)) // Set a maximum width (e.g., 200), but adjust to screen size if smaller
+                                            .padding(.vertical, 15)
+                                            .background(Color("color3"))
+                                            .cornerRadius(15)
+                                    })
+                                }
                                 
-                                Button(action: {}, label: {
-                                    Image("insta")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.horizontal, 75)
-                                        .padding(.vertical, 15)
-                                        .background(Color("color3"))
-                                        .cornerRadius(15)
-                                })
+                                GeometryReader { geometry in
+                                    Button(action: {}, label: {
+                                        Image("insta")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .frame(width: min(geometry.size.width, 200)) // Set a maximum width (e.g., 200), but adjust to screen size if smaller
+                                            .padding(.vertical, 15)
+                                            .background(Color("color3"))
+                                            .cornerRadius(15)
+                                    })
+                                }
                             }
+                            .padding(.horizontal, 20)
+                            .padding(.bottom, 20)
                             
                             Spacer()
-                            
+                                                        
                             HStack {
                                 Text("Don't Have an Account?")
                                     .fontWeight(.bold)
@@ -173,7 +167,7 @@ struct Login: View {
                     }
                 }
             }
-        }
+        }.navigationBarHidden(true)
     }
 }
 

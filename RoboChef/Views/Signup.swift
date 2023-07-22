@@ -10,6 +10,49 @@ import SwiftUI
 struct Signup: View {
     @State private var username: String = ""
     @State private var password: String = ""
+    @State private var confirmPassword: String = ""
+    @State private var email: String = ""
+    @State private var isLinkActive = false
+    @State private var isSignupSuccessful = false
+    @State private var showError = false
+
+    func signup() async {
+        let url = URL(string: "http://localhost:8080/auth/signup")!
+        var request = URLRequest(url: url)
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpMethod = "POST"
+        
+        let parameters: [String: Any] = [
+            "username": username,
+            "password": password,
+            "email": email
+        ]
+        
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
+        } catch {
+            print("Failed to serialize parameters: \(error)")
+            return
+        }
+
+        do {
+            let (_, response) = try await URLSession.shared.data(for: request)
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Invalid response")
+                return
+            }
+            
+            if httpResponse.statusCode == 200 {
+                isSignupSuccessful = true
+            } else {
+                print("Incorrect credentials")
+                print(httpResponse.statusCode)
+            }
+        } catch {
+            print("Error during signup: \(error)")
+        }
+    }
     
     var body: some View {
         NavigationView {
@@ -47,52 +90,57 @@ struct Signup: View {
                                 .padding(.trailing, 100)
                                 .padding(.leading, 20)
                                 .padding(.top, -50)
-//                            Text("A One-Stop Shopping Assistant")
-//                                .foregroundColor(.white)
-//                                .font(.system(size: 24))
-//                                .fontWeight(.bold)
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//                                .padding(.leading, 270)
-//                                .padding(.top, -150)
                         }
 
                         VStack(spacing: 30) {
                             VStack(spacing: 30){
-                                CustomTextField(placeHolder: "Name", imageName: "person", bColor: "color7", tOpacity: 0.6, value: $password)
-                                CustomTextField(placeHolder: "Username", imageName: "envelope", bColor: "color7", tOpacity: 0.6, value: $username)
+                                CustomTextField(placeHolder: "Username", imageName: "person", bColor: "color7", tOpacity: 0.6, value: $username)
                                 CustomTextField(placeHolder: "Password", imageName: "lock", bColor: "color7", tOpacity: 0.6, value: $password)
-                                CustomTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "color7", tOpacity: 0.6, value: $password).padding(.bottom, 20)
+                                CustomTextField(placeHolder: "Confirm Password", imageName: "lock", bColor: "color7", tOpacity: 0.6, value: $confirmPassword)
+                                CustomTextField(placeHolder: "Email", imageName: "envelope", bColor: "color7", tOpacity: 0.6, value: $email).padding(.bottom, 20)
                             }
                             
                             VStack(alignment: .trailing) {
                                 
-                                Button(action: {}, label: {
-                                    CustomButton(title: "Sign Up", bgColor: "color3");
-                                })
+                                NavigationLink(destination: Home(), isActive: $isSignupSuccessful) {
+                                    Button(action: {
+                                        Task {
+                                            await self.signup()
+                                        }
+                                    }, label: {
+                                        CustomButton(title: "Sign In", bgColor: "color3");
+                                    })
+                                }
                             }.padding(.horizontal, 20)
                             
                             HStack(spacing: 20) {
-                                Button(action: {}, label: {
-                                    Image("fb")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.horizontal, 75)
-                                        .padding(.vertical, 15)
-                                        .background(Color("color3"))
-                                        .cornerRadius(15)
-                                })
+                                GeometryReader { geometry in
+                                    Button(action: {}, label: {
+                                        Image("fb")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .frame(width: min(geometry.size.width, 200)) // Set a maximum width (e.g., 200), but adjust to screen size if smaller
+                                            .padding(.vertical, 15)
+                                            .background(Color("color3"))
+                                            .cornerRadius(15)
+                                    })
+                                }
                                 
-                                Button(action: {}, label: {
-                                    Image("insta")
-                                        .resizable()
-                                        .frame(width: 30, height: 30)
-                                        .padding(.horizontal, 75)
-                                        .padding(.vertical, 15)
-                                        .background(Color("color3"))
-                                        .cornerRadius(15)
-                                })
+                                GeometryReader { geometry in
+                                    Button(action: {}, label: {
+                                        Image("insta")
+                                            .resizable()
+                                            .frame(width: 30, height: 30)
+                                            .frame(width: min(geometry.size.width, 200)) // Set a maximum width (e.g., 200), but adjust to screen size if smaller
+                                            .padding(.vertical, 15)
+                                            .background(Color("color3"))
+                                            .cornerRadius(15)
+                                    })
+                                }
                             }
+                            .padding(.horizontal, 20)
                             
+                            Spacer()
                             
                             HStack {
                                 Text("Already Have an Account?")
@@ -100,21 +148,25 @@ struct Signup: View {
                                     .foregroundColor(.white)
                                     .font(.system(size: 18));
                                 
-                                Button(action: {}, label: {
-                                    Text("SIGN UP")
-                                        .font(.system(size: 18))
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.black)
-                                })
+                                NavigationLink(destination: Login(), isActive: $isLinkActive) {
+                                    Button(action: {
+                                        self.isLinkActive = true
+                                    }, label: {
+                                        Text("SIGN IN")
+                                            .font(.system(size: 18))
+                                            .fontWeight(.bold)
+                                            .foregroundColor(.black)
+                                    })
+                                }
                             }
                             .frame(height: 63)
                                 .frame(minWidth: 0, maxWidth: .infinity)
                                 .background(Color("color2"))
                         }
                     }
-                }
+                }.padding(.top, 80)
             }
-        }
+        }.navigationBarHidden(true)
     }
 }
 
