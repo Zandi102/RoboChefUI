@@ -1,0 +1,38 @@
+﻿<Properties StartupConfiguration="{262C56D9-0048-43B3-8223-E41215285878}|https">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.RoboChefServer PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="RoboChefServer/Controllers/GroceryController.cs">
+    <Files>
+      <File FileName="RoboChefServer/Controllers/WeatherForecastController.cs" Line="27" Column="1" />
+      <File FileName="RoboChefServer/appsettings.json" Line="1" Column="1" />
+      <File FileName="RoboChefServer/appsettings.Development.json" Line="1" Column="1" />
+      <File FileName="RoboChefServer/Program.cs" Line="19" Column="2" />
+      <File FileName="RoboChefServer/User.cs" Line="19" Column="2" />
+      <File FileName="RoboChefServer/Startup.cs" Line="53" Column="1" />
+      <File FileName="RoboChefServer/GroceryItem.cs" Line="15" Column="1" />
+      <File FileName="RoboChefServer/Controllers/GroceryController.cs" Line="20" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RoboChefServer" expanded="True">
+            <Node name="RoboChefServer" expanded="True">
+              <Node name="Controllers" expanded="True">
+                <Node name="GroceryController.cs" selected="True" />
+              </Node>
+              <Node name="Properties" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
