@@ -119,7 +119,7 @@ struct GroceryView: View {
                 }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        EditButton().accentColor(Color("color3"))
+                        EditButton()
                     }
                 }
             }

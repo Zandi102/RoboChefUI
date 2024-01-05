@@ -17,7 +17,7 @@ struct Signup: View {
     @State private var showError = false
 
     func signup() async {
-        let url = URL(string: "http://localhost:8080/auth/signup")!
+        let url = URL(string: "http://localhost:8080/auth/register")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -47,7 +47,7 @@ struct Signup: View {
                 isSignupSuccessful = true
             } else {
                 print("Incorrect credentials")
-                print(httpResponse.statusCode)
+                print(httpResponse)
             }
         } catch {
             print("Error during signup: \(error)")

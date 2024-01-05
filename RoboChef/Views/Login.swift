@@ -46,7 +46,7 @@ struct Login: View {
                 isLoginSuccessful = true
             } else {
                 print("Incorrect credentials")
-                print(httpResponse.statusCode)
+                print(httpResponse)
             }
         } catch {
             print("Error during login: \(error)")
