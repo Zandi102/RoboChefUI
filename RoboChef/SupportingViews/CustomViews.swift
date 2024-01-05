@@ -87,6 +87,20 @@ struct CustomButton : View{
     }
 }
 
+struct CustomButtonTwo : View{
+    var title : String
+    var bgColor: String
+    
+    var body: some View {
+        Text(title)
+            .foregroundColor(.white)
+            .frame(height: 40)
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .background(Color(bgColor))
+            .cornerRadius(10)
+    }
+}
+
 struct CustomAlertView: View {
     @Binding var item: String
 

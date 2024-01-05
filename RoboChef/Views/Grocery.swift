@@ -9,11 +9,11 @@ struct GroceryView: View {
         "Tostidos pizza rolls", "Ice Cream", "Spinach"
     ]
 
-    @State var newItem: String = " "
-    @State var newPantryItem: String = " "
-    @State var showAddGroceryFields = false // Track if grocery add fields should be shown
-    @State var showAddPantryFields = false // Track if pantry add fields should be shown
-    @State var showEdit = false // Track if edit mode is active
+    @State var newItem: String = ""
+    @State var newPantryItem: String = ""
+    @State var showAddGroceryFields = false
+    @State var showAddPantryFields = false
+    @State var showEdit = false
 
     func deleteGroceryItem(indexSet: IndexSet) {
         items.remove(atOffsets: indexSet)
@@ -45,10 +45,16 @@ struct GroceryView: View {
         }
     }
 
+    func finishShopping() {
+        pantryItems.append(contentsOf: items)
+        items.removeAll()
+    }
+
     var body: some View {
         NavigationView {
             VStack {
                 List {
+                    // Shopping List Section
                     Section(
                         header:
                             HStack {
@@ -57,7 +63,7 @@ struct GroceryView: View {
                                 Text("Shopping List")
                                     .font(Font.title2)
                                     .foregroundColor(Color("color2"))
-                                    .padding(.trailing, 100)
+                                    .padding(.trailing, 120)
                                 Button("+") {
                                     alertTF(title: "Add Item", message: "Please enter an item to add", hintText: "Chocolate", primaryTitle: "Add Item", secondaryTitle: "Cancel") {text in
                                         newItem = text
@@ -82,7 +88,19 @@ struct GroceryView: View {
                     }
                     .listStyle(.plain)
                     .accentColor(Color("color3"))
+                    
+                    // Finish Shopping Button
+                    if !items.isEmpty {
+                        Button(action: {
+                            finishShopping()
+                        }, label: {
+                            CustomButtonTwo(title: "Finish Shopping", bgColor: "color2")
+                        }).padding(.horizontal, -15)
+                            .padding(.vertical, -10)
+                    }
+                    
 
+                    // My Pantry Section
                     Section(
                         header:
                             HStack {
@@ -91,7 +109,8 @@ struct GroceryView: View {
                                 Text("My Pantry")
                                     .font(Font.title2)
                                     .foregroundColor(Color("color2"))
-                                    .padding(.trailing, 145)
+                                    .padding(.trailing, 160)
+
                                 Button("+") {
                                     alertTF(title: "Add Item", message: "Please enter an item to add", hintText: "Chocolate", primaryTitle: "Add Item", secondaryTitle: "Cancel") {text in
                                         newPantryItem = text
@@ -123,7 +142,6 @@ struct GroceryView: View {
                     }
                 }
             }
-            .navigationTitle("")
             .navigationBarTitleDisplayMode(.inline)
         }
     }
